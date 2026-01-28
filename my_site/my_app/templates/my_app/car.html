@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Автомобили</title>
+
+  <style>
+    :root{
+      --bg: #0f172a;
+      --card: #111827;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --line: rgba(148,163,184,.22);
+      --accent: #38bdf8;
+      --good: #22c55e;
+      --bad: #ef4444;
+      --shadow: 0 10px 25px rgba(0,0,0,.35);
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; }
+    body{
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 20% -10%, rgba(56,189,248,.18), transparent 55%),
+                  radial-gradient(900px 500px at 90% 0%, rgba(34,197,94,.12), transparent 55%),
+                  var(--bg);
+      color: var(--text);
+    }
+
+    .container{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px 16px 48px;
+    }
+
+    header{
+      display: flex;
+      gap: 16px;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .title{
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: .2px;
+    }
+
+    .subtitle{
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .count-badge{
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(17,24,39,.55);
+      backdrop-filter: blur(8px);
+      font-size: 13px;
+    }
+
+    .grid{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    @media (max-width: 980px){
+      .grid{ grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px){
+      header{ flex-direction: column; align-items: flex-start; }
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      border: 1px solid var(--line);
+      background: rgba(17,24,39,.75);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform .15s ease, border-color .15s ease;
+    }
+    .card:hover{
+      transform: translateY(-3px);
+      border-color: rgba(56,189,248,.35);
+    }
+
+    .photo{
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/10;
+      background: #0b1020;
+      overflow: hidden;
+    }
+    .photo img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.01);
+    }
+
+    .no-photo{
+      height: 100%;
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+      font-size: 13px;
+    }
+
+    .content{
+      padding: 14px 14px 16px;
+    }
+
+    .row{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .name{
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    .pill{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+      background: rgba(15,23,42,.45);
+    }
+
+    .meta{
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .meta-box{
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: rgba(15,23,42,.35);
+    }
+
+    .meta-label{
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+    .meta-value{
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: .2px;
+    }
+
+    .price{
+      color: var(--accent);
+    }
+
+    .footer{
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+    }
+
+    .btn{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(56,189,248,.35);
+      background: rgba(56,189,248,.12);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 13px;
+      transition: background .15s ease, border-color .15s ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .btn:hover{
+      background: rgba(56,189,248,.18);
+      border-color: rgba(56,189,248,.55);
+    }
+
+    .muted{
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .empty{
+      border: 1px dashed rgba(148,163,184,.35);
+      border-radius: var(--radius);
+      padding: 22px;
+      background: rgba(17,24,39,.45);
+      color: var(--muted);
+      text-align: center;
+      margin-top: 18px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1 class="title">Каталог автомобилей</h1>
+        <p class="subtitle">Вывод из базы данных (Django template / Jinja-синтаксис)</p>
+      </div>
+
+      <div class="count-badge">
+        Всего: <b>{{ auto|length }}</b>
+      </div>
+    </header>
+
+    {% if auto %}
+      <div class="grid">
+        {% for car in auto %}
+          <article class="card">
+            <div class="photo">
+              {% if car.photo_car %}
+                <img src="{{ car.photo_car.url }}" alt="Фото: {{ car.name }}">
+              {% else %}
+                <div class="no-photo">Фото не загружено</div>
+              {% endif %}
+            </div>
+
+            <div class="content">
+              <div class="row">
+                <h2 class="name">{{ car.name }}</h2>
+                <span class="pill">Год: <b>{{ car.year }}</b></span>
+              </div>
+
+              <div class="meta">
+                <div class="meta-box">
+                  <span class="meta-label">Цена</span>
+                  <div class="meta-value price">{{ car.price }} сом</div>
+                </div>
+
+                <div class="meta-box">
+                  <span class="meta-label">ID</span>
+                  <div class="meta-value">#{{ car.id }}</div>
+                </div>
+              </div>
+
+<div class="footer">
+  <span class="muted">Обновлено: {% now "d.m.Y" %}</span>
+  <a class="btn" href="{% url 'details' car.id %}">Подробнее</a>
+</div>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="empty">
+        Пока нет автомобилей в базе. Добавь записи в админке.
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>

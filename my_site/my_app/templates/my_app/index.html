@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+    {% for b in book %}
+      <div class="card">
+        <h5>НАЗВАНИЕ КНИГИ  {{ b.title }}</h5>
+          <br>
+        <span>ОПИСАНИЕ КНИГИ  {{ b.description}}</span>
+          <br>
+        <span>ДАТА ПУБЛИКАЦИИ {{ b.date }}</span>
+          <br>
+        <span>ЦЕНА  {{ b.price }}</span>
+
+      </div>
+    {% endfor %}
+
+    {% for f in film %}
+    <div class="card">
+        <h5>НАЗВАНИЕ ФИЛЬМА  {{ f.title }}</h5>
+          <br>
+        <span>ОГРАНИЧЕНИЕ ВОЗРАСТА  {{ f.age_category}}</span>
+          <br>
+        <span>ФОТО <img src="{{ f.cinema_photo.url }}"></span>
+          <br>
+
+      </div>
+    {% endfor %}
+</body>
+</html>
