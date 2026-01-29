@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Book, Cinematica, Car, CarDetails
+from .forms import PhotoForm
 
 
 def info_book(request):
@@ -31,4 +32,27 @@ def car_detail(request, car_id):
     return render(request,
                   'my_app/details.html',
                   {"car": car, "details": details})
+
+
+# def category_gallery(request, category_id):
+#     category = get_object_or_404(Car, id=category_id)
+#     photos = Car.objects.filter(category=category)
+#     form = PhotoForm()
+#     return render(request, 'ma_app/details.html', {
+#         'category': category,
+#         'photos': photos,
+#         'form': form
+#     })
+
+
+def add_car(request):
+    if request.method == 'POST':
+        form = PhotoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('car')
+    else:
+        form = PhotoForm()
+
+    return render(request, 'my_app/add_car.html', {'form': form})
 

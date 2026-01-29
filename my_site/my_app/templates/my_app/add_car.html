@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Добавить/изменить фото для: {{ car.name }}</h2>
+
+<h2>Добавить машину</h2>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <p>{{ form.name.label }}<br>{{ form.name }}</p>
+    <p>{{ form.year.label }}<br>{{ form.year }}</p>
+    <p>{{ form.price.label }}<br>{{ form.price }}</p>
+    <p>{{ form.photo_car.label }}<br>{{ form.photo_car }}</p>
+
+    <button type="submit">Сохранить</button>
+</form>
+
+</body>
+</html>
